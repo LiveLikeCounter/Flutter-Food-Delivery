@@ -5,8 +5,7 @@ A app based on the winning design of the Food Delivery App "Order Tracking" *by 
 ## Getting Started
 
 - Git clone
-- 
+- Install packages
+- F5 to run
 
-## Donate
 
-...
