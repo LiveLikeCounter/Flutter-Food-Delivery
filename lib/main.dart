@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flare_flutter/flare_actor.dart';
 
+import 'package:flutter_fooddelivery/timer.dart';
 import 'util.dart';
 
 void main() => runApp(App());
@@ -22,6 +23,14 @@ class Order extends StatefulWidget {
 }
 
 class _OrderState extends State<Order> {
+  String animationName = 'Stroke';
+
+  @override
+  void initState() {
+    super.initState();
+  
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,9 +59,10 @@ class _OrderState extends State<Order> {
           ),
         ],
       ),
-      body: Container(
+      body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             SizedBox(height: 50),
             Text(
@@ -60,18 +70,16 @@ class _OrderState extends State<Order> {
               style:
                   TextStyle(color: Color.fromRGBO(0, 0, 0, 0.2), fontSize: 12),
             ),
-            Text(
-              '00 : 15 : 01',
-              style: TextStyle(fontSize: 27, fontWeight: FontWeight.w500),
+            Container(
+              child: Timer(),
             ),
-            SizedBox(height: 20),
             Container(
               height: 30,
               child: FlareActor(
                 'assets/images/FillLine.flr',
-                // alignment: Alignment.center,
-                fit: BoxFit.fitHeight,
-                animation: null,
+                alignment: Alignment.center,
+                fit: BoxFit.contain,
+                animation: animationName,
               ),
             ),
             SizedBox(height: 50),
@@ -85,10 +93,6 @@ class _OrderState extends State<Order> {
                   fontWeight: FontWeight.w600),
             ),
             SizedBox(height: 20),
-            Expanded(
-              flex: 1,
-              child: Container(child: Container()),
-            ),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: OutlineButton(
@@ -119,6 +123,70 @@ class _OrderState extends State<Order> {
               ),
             ),
             SizedBox(height: 50),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(backgroundColor: Color(0xFF26C6DA)),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Container(
+                child: Column(
+              children: <Widget>[
+                TextField(
+                  decoration: const InputDecoration(
+                    labelText: "Description",
+                  ),
+                  style: Theme.of(context).textTheme.title,
+                ),
+                TextField(
+                  decoration: const InputDecoration(
+                    labelText: "Description",
+                  ),
+                  style: Theme.of(context).textTheme.title,
+                ),
+                TextField(
+                  decoration: const InputDecoration(
+                    labelText: "Description",
+                  ),
+                  style: Theme.of(context).textTheme.title,
+                ),
+                TextField(
+                  decoration: const InputDecoration(
+                    labelText: "Description",
+                  ),
+                  style: Theme.of(context).textTheme.title,
+                ),
+                TextField(
+                  decoration: const InputDecoration(
+                    labelText: "Description",
+                  ),
+                  style: Theme.of(context).textTheme.title,
+                ),
+              ],
+            )),
+            Container(
+              margin: EdgeInsets.only(bottom: 16.0),
+              child: FloatingActionButton(
+                  backgroundColor: Color(0xFFE57373),
+                  child: Icon(Icons.check),
+                  onPressed: () {}),
+            )
           ],
         ),
       ),

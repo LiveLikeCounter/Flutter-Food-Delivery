@@ -6,8 +6,7 @@ https://www.uplabs.com/posts/food-delivery-app-order-tracking
 ## Getting Started
 
 - Git clone
-- 
+- Install packages
+- F5 to run
 
-## Donate
 
-...
