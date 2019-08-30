@@ -31,7 +31,7 @@ class _TimerState extends State<Timer> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    double sreenWidth = MediaQuery.of(context).size.width / 0.1;
+    // double sreenWidth = MediaQuery.of(context).size.width / 0.1;
 
     return Container(
       margin: EdgeInsets.only(bottom: 20),
