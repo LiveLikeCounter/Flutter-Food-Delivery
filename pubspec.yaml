@@ -10,8 +10,6 @@ dependencies:
   flutter:
     sdk: flutter
 
-  flare_flutter: any
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

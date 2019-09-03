@@ -12,8 +12,7 @@ class _TimerState extends State<Timer> with TickerProviderStateMixin {
   AnimationController animationController;
 
   String get timerString {
-    Duration duration =
-        animationController.duration * animationController.value;
+    Duration duration = animationController.duration * animationController.value;
     return '${(duration.inHours % 60).toString().padLeft(2, '0')} : ${(duration.inMinutes % 60).toString().padLeft(2, '0')} : ${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
   }
 
@@ -22,11 +21,19 @@ class _TimerState extends State<Timer> with TickerProviderStateMixin {
     super.initState();
     animationController = AnimationController(
       vsync: this,
-      duration: Duration(hours: 2, minutes: 2, seconds: 2),
+      // duration: Duration(hours: 0, minutes: 0, seconds: 10),
+      duration: Duration(milliseconds: 22200),
     );
-    animationController.reverse(
-        from:
-            animationController.value == 0.0 ? 1.0 : animationController.value);
+    animationController.reverse(from: animationController.value == 0.0 ? 1.0 : animationController.value);
+    print('Status:   ${animationController.status}');
+    print('Velocity: ${animationController.velocity}');
+    print('Duration: ${animationController.duration}');
+    animationController.addListener(() {
+      print('Listning');
+    });
+    animationController.addStatusListener((state) {
+      print('Status: ${state}');
+    });
   }
 
   @override
@@ -112,7 +119,10 @@ class ShapesPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) => false;
+  bool shouldRepaint(CustomPainter old) {
+    print('Old: ${old}');
+    return true;
+  }
 }
 
 class TimerPainter extends CustomPainter {
