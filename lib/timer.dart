@@ -20,142 +20,94 @@ class _TimerState extends State<Timer> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     animationController = AnimationController(
+      duration: Duration(milliseconds: 8800),
       vsync: this,
-      // duration: Duration(hours: 0, minutes: 0, seconds: 10),
-      duration: Duration(milliseconds: 22200),
     );
     animationController.reverse(from: animationController.value == 0.0 ? 1.0 : animationController.value);
-    print('Status:   ${animationController.status}');
-    print('Velocity: ${animationController.velocity}');
-    print('Duration: ${animationController.duration}');
-    animationController.addListener(() {
-      print('Listning');
-    });
-    animationController.addStatusListener((state) {
-      print('Status: ${state}');
-    });
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // double sreenWidth = MediaQuery.of(context).size.width / 0.1;
-
+    print(timerString);
     return Container(
-      margin: EdgeInsets.only(bottom: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           AnimatedBuilder(
-              animation: animationController,
-              builder: (BuildContext context, Widget child) {
-                return Text(
-                  timerString,
-                  style: TextStyle(fontSize: 27, fontWeight: FontWeight.w500),
-                );
-              }),
-          Container(
-            margin: EdgeInsets.only(top: 20),
-            child: Align(
-              alignment: Alignment.center,
-              child: CustomPaint(
-                painter: ShapesPainter(),
-                child: Container(
-                  width: 290,
-                ),
-              ),
+            animation: animationController,
+            builder: (BuildContext context, Widget child) => Text(
+              timerString,
+              style: TextStyle(fontSize: 27, fontWeight: FontWeight.w500),
             ),
           ),
-          Container(
-            margin: EdgeInsets.only(top: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Text(
-                  'Recieved',
-                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12),
-                ),
-                Text(
-                  'Preparing',
-                  style: TextStyle(color: FoodColors.Grey, fontSize: 12),
-                ),
-                Text(
-                  'Ready',
-                  style: TextStyle(color: FoodColors.Grey, fontSize: 12),
-                ),
-              ],
-            ),
-          )
         ],
       ),
     );
   }
 }
 
-class ShapesPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint();
-    paint.color = FoodColors.Grey;
-    paint.strokeWidth = 2;
-    paint.strokeCap = StrokeCap.round;
 
-    // center of the canvas is (x,y) => (width/2, height/2)
-    var dotFirst = Offset(10, 0);
-    canvas.drawCircle(dotFirst, 12.0, paint);
 
-    final lineOneStart = Offset(30, 0);
-    final lineOneEnd = Offset(120, 0);
-    canvas.drawLine(lineOneStart, lineOneEnd, paint);
+// class TimerStateFull extends StatefulWidget {
+//   TimerStateFull({
+//     @required AnimationController controller,
+//     @required Duration timerDuration,
+//   })  : animation = TimerAnimation(controller),
+//         this.animationDuration = timerDuration;
 
-    var dotSecond = Offset(140, 0);
-    canvas.drawCircle(dotSecond, 12.0, paint);
+//   final TimerAnimation animation;
+//   final Duration animationDuration;
 
-    final lineTwoStart = Offset(160, 0);
-    final lineTwoEnd = Offset(270, 0);
-    canvas.drawLine(lineTwoStart, lineTwoEnd, paint);
+//   _TimerStateFullState createState() => _TimerStateFullState();
+// }
 
-    var dotThird = Offset(290, 0);
-    canvas.drawCircle(dotThird, 12.0, paint);
-  }
+// class _TimerStateFullState extends State<TimerStateFull>
+//     with TickerProviderStateMixin {
+//   AnimationController controller;
 
-  @override
-  bool shouldRepaint(CustomPainter old) {
-    print('Old: ${old}');
-    return true;
-  }
-}
+//   String get timerString {
+//     Duration duration = controller.duration * controller.value;
+//     return '${(duration.inHours % 60).toString().padLeft(2, '0')} : ${(duration.inMinutes % 60).toString().padLeft(2, '0')} : ${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
+//   }
 
-class TimerPainter extends CustomPainter {
-  TimerPainter({
-    this.animation,
-    this.backgroundColor,
-    this.color,
-  }) : super(repaint: animation);
+//   @override
+//   void initState() {
+//     super.initState();
 
-  final Animation<double> animation;
-  final Color backgroundColor, color;
+//     controller = AnimationController(
+//       duration: Duration(milliseconds: 2200),
+//       vsync: this,
+//     );
+//     controller.reverse();
 
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..color = backgroundColor
-      ..strokeWidth = 5.0
-      ..strokeCap = StrokeCap.round
-      ..style = PaintingStyle.stroke;
+//     // animationForward = AnimationController(
+//     //   duration: timerDuration,
+//     //   vsync: this,
+//     // );
+//     // animationForward.forward();
+//   }
 
-    canvas.drawCircle(size.center(Offset.zero), size.width / 2.0, paint);
-    paint.color = color;
-    double progress = (1.0 - animation.value) * 2 * math.pi;
-    canvas.drawArc(Offset.zero & size, math.pi * 1.5, -progress, false, paint);
-  }
+//   @override
+//   void dispose() {
+//     controller.dispose();
+//     // animationForward.dispose();
+//     super.dispose();
+//   }
 
-  @override
-  bool shouldRepaint(TimerPainter old) {
-    return animation.value != old.animation.value ||
-        color != old.color ||
-        backgroundColor != old.backgroundColor;
-  }
-
-  @override
-  bool shouldRebuildSemantics(TimerPainter oldDelegate) => false;
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return AnimatedBuilder(
+//       animation: controller,
+//       builder: (BuildContext context, Widget child) => Text(
+//         timerString,
+//         style: TextStyle(fontSize: 27, fontWeight: FontWeight.w500),
+//       ),
+//     );
+//   }
+// }

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_fooddelivery/timer.dart';
+import 'package:flutter_fooddelivery/progressBar.dart';
 import 'util.dart';
+
 
 void main() => runApp(App());
 
@@ -21,13 +23,33 @@ class Order extends StatefulWidget {
   _OrderState createState() => _OrderState();
 }
 
-class _OrderState extends State<Order> {
-  String animationName = 'Stroke';
+class _OrderState extends State<Order> with TickerProviderStateMixin {
+  // final timerDuration = Duration(milliseconds: 2500);
+  // AnimationController animationBackward;
+  // AnimationController animationForward;
 
   @override
   void initState() {
     super.initState();
-    // ...
+
+    // animationBackward = AnimationController(
+    //   duration: timerDuration,
+    //   vsync: this,
+    // );
+    // animationBackward.reverse();
+
+    // animationForward = AnimationController(
+    //   duration: timerDuration,
+    //   vsync: this,
+    // );
+    // animationForward.forward();
+  }
+
+  @override
+  void dispose() {
+    // animationBackward.dispose();
+    // animationForward.dispose();
+    super.dispose();
   }
   
   @override
@@ -69,12 +91,13 @@ class _OrderState extends State<Order> {
               style:
                   TextStyle(color: Color.fromRGBO(0, 0, 0, 0.2), fontSize: 12),
             ),
-            Container(
-              child: Timer(),
-            ),
+            Timer(),
+            ProgressBar(),
             SizedBox(height: 50),
+            //Avatar(),
             Image.asset('assets/images/Ober.png', width: 125),
             SizedBox(height: 20),
+            //OrderStatusText(),
             Text(
               'Order Confirmed',
               style: TextStyle(
