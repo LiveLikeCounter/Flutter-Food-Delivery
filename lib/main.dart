@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_fooddelivery/timer.dart';
 import 'package:flutter_fooddelivery/progressBar.dart';
+import 'package:flutter_fooddelivery/avatar.dart';
 import 'util.dart';
 
 
@@ -94,8 +95,7 @@ class _OrderState extends State<Order> with TickerProviderStateMixin {
             Timer(),
             ProgressBar(),
             SizedBox(height: 50),
-            //Avatar(),
-            Image.asset('assets/images/Ober.png', width: 125),
+            Avatar(),
             SizedBox(height: 20),
             //OrderStatusText(),
             Text(
