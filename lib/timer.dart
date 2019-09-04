@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter_fooddelivery/util.dart';
-
 class Timer extends StatefulWidget {
   Timer({Key key}) : super(key: key);
   _TimerState createState() => _TimerState();
@@ -33,7 +31,6 @@ class _TimerState extends State<Timer> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    print(timerString);
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,

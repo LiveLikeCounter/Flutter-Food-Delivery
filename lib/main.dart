@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_fooddelivery/timer.dart';
 import 'package:flutter_fooddelivery/progressBar.dart';
-import 'package:flutter_fooddelivery/avatar.dart';
+import 'package:flutter_fooddelivery/avatarAndText.dart';
 import 'util.dart';
-
 
 void main() => runApp(App());
 
@@ -26,33 +25,17 @@ class Order extends StatefulWidget {
 
 class _OrderState extends State<Order> with TickerProviderStateMixin {
   // final timerDuration = Duration(milliseconds: 2500);
-  // AnimationController animationBackward;
-  // AnimationController animationForward;
 
   @override
   void initState() {
     super.initState();
-
-    // animationBackward = AnimationController(
-    //   duration: timerDuration,
-    //   vsync: this,
-    // );
-    // animationBackward.reverse();
-
-    // animationForward = AnimationController(
-    //   duration: timerDuration,
-    //   vsync: this,
-    // );
-    // animationForward.forward();
   }
 
   @override
   void dispose() {
-    // animationBackward.dispose();
-    // animationForward.dispose();
     super.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,30 +65,24 @@ class _OrderState extends State<Order> with TickerProviderStateMixin {
         ],
       ),
       body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            SizedBox(height: 50),
-            Text(
-              'Order#568',
-              style:
-                  TextStyle(color: Color.fromRGBO(0, 0, 0, 0.2), fontSize: 12),
+            Container(
+              margin: EdgeInsets.only(top: 50),
+              child: Text(
+                'Order#568',
+                style:
+                    TextStyle(color: Color.fromRGBO(0, 0, 0, 0.2), fontSize: 12),
+              ),
             ),
             Timer(),
             ProgressBar(),
             SizedBox(height: 50),
-            Avatar(),
-            SizedBox(height: 20),
-            //OrderStatusText(),
-            Text(
-              'Order Confirmed',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600),
-            ),
-            SizedBox(height: 20),
+            AvatarAndText(),
+            SizedBox(height: 50),
             Container(
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: OutlineButton(
@@ -135,7 +112,6 @@ class _OrderState extends State<Order> with TickerProviderStateMixin {
                 ),
               ),
             ),
-            SizedBox(height: 50),
           ],
         ),
       ),
